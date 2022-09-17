@@ -2,6 +2,9 @@ package com.micros.booking.entity;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Train")
 public class Train {
 
 	private int train_id;
@@ -13,14 +16,13 @@ public class Train {
 	private String from_station;
 	private String to_station;
 	private List<String> runs_on;
-	private double base_fare;
 	
 	public Train() {
 		
 	}
 
 	public Train(int train_id, int total_Seat_sleeper, int total_Seat_ac3, int total_Seat_ac2, int total_Seat_ac1,
-			String train_name, String from_station, String to_station, List<String> runs_on, double base_fare) {
+			String train_name, String from_station, String to_station, List<String> runs_on) {
 		super();
 		this.train_id = train_id;
 		this.total_Seat_sleeper = total_Seat_sleeper;
@@ -31,7 +33,7 @@ public class Train {
 		this.from_station = from_station;
 		this.to_station = to_station;
 		this.runs_on = runs_on;
-		this.base_fare = base_fare;
+		
 	}
 
 	public int getTrain_id() {
@@ -105,27 +107,6 @@ public class Train {
 	public void setRuns_on(List<String> runs_on) {
 		this.runs_on = runs_on;
 	}
-
-	public double getBase_fare() {
-		return base_fare;
-	}
-
-	public void setBase_fare(double base_fare) {
-		this.base_fare = base_fare;
-	}
-
-	@Override
-	public String toString() {
-		return "Train [train_id=" + train_id + ", total_Seat_sleeper=" + total_Seat_sleeper + ", total_Seat_ac3="
-				+ total_Seat_ac3 + ", total_Seat_ac2=" + total_Seat_ac2 + ", total_Seat_ac1=" + total_Seat_ac1
-				+ ", train_name=" + train_name + ", from_station=" + from_station + ", to_station=" + to_station
-				+ ", runs_on=" + runs_on + ", base_fare=" + base_fare + "]";
-	}
-	
-	
-	
-
-	
 
 }
 
