@@ -22,7 +22,7 @@ public class TrainUser {
 	@NotBlank
 	@Size(max=30)
 	private String password;
-//	private long phone;
+
 	
 	public TrainUser()
 	{}
@@ -45,12 +45,12 @@ public class TrainUser {
 
 
 	public TrainUser(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 30) String email,
-			@NotBlank @Size(max = 30) String password /*long phone*/) {
+			@NotBlank @Size(max = 30) String password) {
 		
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		//this.phone = phone;
+
 	}
 	
 	
@@ -78,19 +78,5 @@ public class TrainUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-//	public long getPhone() {
-//		return phone;
-//	}
-//
-//	public void setPhone(long phone) {
-//		this.phone = phone;
-//	}
-
-//	@Override
-//	public String toString() {
-//		return "TrainUser [user_id=" + user_id + ", email=" + email + ", password=" + password + ", phone=" + phone
-//				+ "]";
-//	}
 	
 }
