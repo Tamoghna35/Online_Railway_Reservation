@@ -42,7 +42,7 @@ public class AuthController {
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser( @RequestBody LoginRequest loginRequest) {
 		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 
@@ -55,15 +55,15 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser( @RequestBody SignupRequest signUpRequest) {
-		if (adminRepository.existsByUsername(signUpRequest.getUserName())) {
+		if (adminRepository.existsByUsername(signUpRequest.getUsername())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
 		}
 		if (adminRepository.existsByEmail(signUpRequest.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}
 		// Create new user's account
-		Admin admin = new Admin(signUpRequest.getUserName(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()));
+		Admin admin = new Admin(signUpRequest.getUsername(), signUpRequest.getEmail(),
+				encoder.encode(signUpRequest.getPassword()),signUpRequest.getName());
 
 		adminRepository.save(admin);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

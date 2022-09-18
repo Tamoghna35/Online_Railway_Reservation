@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import io.railway.adminservice.entity.Admin;
 import io.railway.adminservice.entity.Train;
 import io.railway.adminservice.service.AdminService;
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
 @RequestMapping("/adminSearch")
 public class AdminController {
@@ -91,26 +90,28 @@ public class AdminController {
 	
 	
 	
-	@PutMapping("updateTrain/{id}")
-	public Object updateTrain(@PathVariable("id") int id, @RequestBody Train train_new) {
-		restTemplate.put("http://train-service/trainSearch/updateById/"+id, train_new);
-		//Object train = restTemplate.getForObject("http://train-service/trainSearch/getById/"+id, Object.class);
-		return train_new;
-	}
+//	@PutMapping("updateTrain/{id}")
+//	public Object updateTrain(@PathVariable("id") int id, @RequestBody Train train_new) {
+//		restTemplate.put("http://train-service/trainSearch/updateById/"+id, train_new);
+//		//Object train = restTemplate.getForObject("http://train-service/trainSearch/getById/"+id, Object.class);
+//		return train_new;
+//	}
+//	
+//	
+//	@DeleteMapping("deleteTrain/{id}")
+//	public String deleteTrain(@PathVariable("id") int id)
+//	{
+//		try {
+//		restTemplate.delete("http://train-service/trainSearch/deleteTrainbyid/"+id);
+//		return "Deleted Successfully";
+//		}
+//		catch(Exception Ex)
+//		{
+//			System.out.println(Ex.getMessage());
+//			return "Not Deleted";
+//		}
+//	}
 	
 	
-	@DeleteMapping("deleteTrain/{id}")
-	public String deleteTrain(@PathVariable("id") int id)
-	{
-		try {
-		restTemplate.delete("http://train-service/trainSearch/deleteTrainbyid/"+id);
-		return "Deleted Successfully";
-		}
-		catch(Exception Ex)
-		{
-			System.out.println(Ex.getMessage());
-			return "Not Deleted";
-		}
-	}
-		
+	
 }

@@ -18,11 +18,12 @@ public class Admin {
 
 	}
 
-	public Admin(String username, String email, String password) {
+	public Admin(String username, String email, String password, String name) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.name = name;
 	}
 
 	public String getId() {
@@ -65,10 +66,5 @@ public class Admin {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "Admin [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", name="
-				+ name + "]";
-	}
-
+	
 }

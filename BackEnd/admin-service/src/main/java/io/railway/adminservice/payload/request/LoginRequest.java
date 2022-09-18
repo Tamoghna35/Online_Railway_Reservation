@@ -1,20 +1,28 @@
 package io.railway.adminservice.payload.request;
 
-
 public class LoginRequest {
-	
-	
-	private String userName;
 
-	
+	private String username;
+
 	private String password;
 
-	public String getUserName() {
-		return userName;
+	public LoginRequest() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public LoginRequest(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -24,7 +32,5 @@ public class LoginRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 }
