@@ -1,6 +1,7 @@
 package com.micros.booking.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,7 +15,7 @@ public class BookingDetails {
 	private int age;
 	private int seatNo;
 	private String gender;
-	private Timestamp time;
+	private Date time;
 	private String id_number;
 	public BookingDetails() {
 		super();
@@ -67,7 +68,7 @@ public class BookingDetails {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Timestamp getTime() {
+	public Date getTime() {
 		return time;
 	}
 	public void setTime(Timestamp time) {

@@ -1,5 +1,7 @@
 package com.micros.booking.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -70,21 +72,28 @@ public class BookingController {
 		return book;
 	}
 	
-	
-	
-	@GetMapping("/findTrain/{name}")
-	public Train[] getBooking(@PathVariable("name") String name) {
-		RestTemplate restTemplate = new RestTemplate();
+	@GetMapping("/allBookingsWithOfUsers/{id}")
+	public List<Booking> getByUserId(@PathVariable("id") String id) {
+
 		
-		Train[] train =  restTemplate.getForObject("http://localhost:8086/trainSearch/findByTrainName/"+name, Train[].class);
-		return  train;
+		 List<Booking> book = repository.findByBooking(id);
+		 return book ;
 	}
 	
 	@GetMapping("/showTicket/{pnr}")
-	public Booking getBookedTicket(@PathVariable("pnr") int pnr) {
-		
-		return null;
+	public Booking getBookedTicket(@PathVariable("pnr") String pnr) {
+		Booking book =repository.findPnr(pnr);
+		return book;
 	}
+	
+//	@GetMapping("/findTrain/{name}")
+//	public Train[] getBooking(@PathVariable("name") String name) {
+//		RestTemplate restTemplate = new RestTemplate();
+//		
+//		Train[] train =  restTemplate.getForObject("http://localhost:8086/trainSearch/findByTrainName/"+name, Train[].class);
+//		return  train;
+//	}
+	
 	
 //	
 //	@GetMapping("/findAllUsers")

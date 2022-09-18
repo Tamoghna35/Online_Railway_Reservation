@@ -14,6 +14,8 @@ public class Booking {
 	private  BookingInfo bookingDetails;
 	private User user;
 	private String price;
+	private String pnr;
+	private String userId;
     private String status;
 
 
@@ -24,12 +26,14 @@ public class Booking {
 
 
 	public Booking(List<BookingDetails> passengerList, BookingInfo bookingDetails, User user, String price,
-			String status) {
+			String pnr,String userId,String status) {
 		super();
 		this.passengerList = passengerList;
 		this.bookingDetails = bookingDetails;
 		this.user = user;
 		this.price = price;
+		this.pnr=pnr;
+		this.userId=userId;
 		this.status = status;
 	}
 
@@ -81,6 +85,27 @@ public class Booking {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	
+
+	public String getPnr() {
+		return pnr;
+	}
+
+
+	public void setPnr(String pnr) {
+		this.pnr = pnr;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 
