@@ -14,8 +14,6 @@ public class Booking {
 	private  BookingInfo bookingDetails;
 	private User user;
 	private String price;
-	
-	
     private String status;
 
 
