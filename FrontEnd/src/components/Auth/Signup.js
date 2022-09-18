@@ -115,7 +115,7 @@ const Signup = () => {
             ref={passwordInputRef}
           />
           {!isLoading && <button>Sign Up</button>}
-          {isLoading && <p>Sending request...</p>}
+          {isLoading && <p>Request sending...</p>}
           <p className="message">
             Already registered? <a href="#">Sign In</a>
           </p>

@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { connect } from "react-redux";
+
 import { TicketPrice } from "./TicketPrice";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import PassengerCard from "./passengerCard";
 import service from "../../Services/booking";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { v4 as uuidv4 } from "uuid";
+import "./Success.css";
+import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
+import { display } from "@mui/system";
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export const Review = (props) => {
   const history = useNavigate();
@@ -14,8 +22,28 @@ export const Review = (props) => {
   const location = useLocation();
   const data = location.state;
 
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const [successMessage, setSuccsessMessage] = useState(true);
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setState({ ...state, open: false });
+  };
+
   console.log(data);
   const authCtx = useContext(AuthContext);
+
+  // console.log(data.price);
 
   console.log(authCtx.userId);
 
@@ -34,17 +62,18 @@ export const Review = (props) => {
         seatNo: data.passengerDetail.at(i).seatNo,
         gender: data.passengerDetail.at(i).gender,
         time: new Date(),
-        id_number: "7719341441",
+        id_number: "9102764714",
       };
       passList.push(obj);
     }
+
     console.log(passList);
 
     const bookingData = {
       bookingDetails: {
-        id: data.trainData.train_id.toString(),
-        pnr: Date.now().toString(),
+        pnr: pnr,
         train_no: data.trainData.train_id,
+        train_name: data.trainData.train_name,
         from_station: data.trainData.from_station,
         to_station: data.trainData.to_station,
         clas: data.train_class,
@@ -53,14 +82,17 @@ export const Review = (props) => {
         no_of_seats: 10,
         time: new Date(),
       },
+
       passengerList: passList,
 
       user: {
-        username: "vikash1",
-        password: "12345678",
-        email: "vik@gmail.com",
+        username: authCtx.userId.username,
+
+        email: authCtx.userId.email,
       },
       price: data.price.toString(),
+      userId: authCtx.userId.id,
+      pnr: pnr,
       status: "conform",
     };
 
@@ -70,6 +102,8 @@ export const Review = (props) => {
         console.log(res.data);
         console.log("success");
         if (res.status === 200) {
+          setState({ open: true, vertical: "top", horizontal: "right" });
+
           return res.data;
         } else {
           return res.data.then((data) => {
@@ -78,15 +112,52 @@ export const Review = (props) => {
         }
       })
       .then((data) => {
-        history("/", { replace: true });
+        // history("/", { replace: true });
+        setSuccsessMessage(false);
+        setState({ open: true, vertical: "top", horizontal: "right" });
       })
       .catch((err) => {
         alert(err.message);
       });
   };
 
+  const ShowNext = successMessage ? "none" : "block";
+
   return (
     <div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical, horizontal }}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Booking Successfully....
+        </Alert>
+      </Snackbar>
+      {!successMessage && (
+        <div class="ui success message">
+          <div id="myModal" class="modal header" style={{ display: ShowNext }}>
+            <div class="modal-content">
+              <h2>
+                <i
+                  class="check circle outline icon"
+                  style={{ fontSize: "30px" }}
+                ></i>
+                Booking Conform....
+              </h2>
+              <h4>Thank You For choosing us...</h4>
+              <button
+                class="ui icon button"
+                onClick={() => history("/", { replace: true })}
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="ui three steps">
         <div className="completed step">
           <i className="user icon"></i>
@@ -115,9 +186,10 @@ export const Review = (props) => {
           <div class="ui segment">
             <p></p>
             <div class="ui segment">
-            <p>
+              <p>
                 Train Name: {(data.trainData.train_name || " ").toUpperCase()}
               </p>
+
               <div>
                 <p>CLASS : {data.train_class}</p>
               </div>
@@ -126,14 +198,12 @@ export const Review = (props) => {
               <div>
                 <p className="p1">
                   <p className="p1">
-                    {/* {(isData.from_station || " ").toUpperCase()} */}
-                    {(data.trainData.from_station|| " ").toUpperCase()}
+                    {(data.trainData.from_station || " ").toUpperCase()}
                   </p>
                   <i className="arrow right icon"></i>
                 </p>
                 <p className="p1">
-                  {/* {(isData.to_station || "").toUpperCase()} | */}
-                  {(data.trainData.to_station ||" ").toUpperCase()}
+                  {(data.trainData.to_station || "").toUpperCase()} |
                 </p>
                 <p className="p1">{data.train_class}</p>
                 <p className="p1">Quota</p>
@@ -154,7 +224,6 @@ export const Review = (props) => {
                 </tr>
               </thead>
             </table>
-
             {data.passengerDetail.map((detail) => (
               <PassengerCard passengerData={detail} />
             ))}
@@ -173,13 +242,14 @@ export const Review = (props) => {
               class="ui positive labeled icon button"
               onClick={submitHandler}
             >
+              Pay
               <i class="rupee sign icon"></i>
             </button>
           </div>
         </div>
         <div class="four wide column">
           <div class="ui segment">
-          <TicketPrice
+            <TicketPrice
               priceData={data.price * data.passengerDetail.length}
             ></TicketPrice>
           </div>

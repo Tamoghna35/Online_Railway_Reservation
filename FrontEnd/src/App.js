@@ -22,6 +22,7 @@ import AuthContext from "./store/auth-context";
 import TrainList from "./components/SearchTrain/TrainList";
 import TrainBooking from "./components/Booking/TrainBooking";
 import { Review } from "./components/Booking/Review";
+import { PnrInfo } from "./components/SearchTrain/PnrSearchPages/PnrInfo";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
@@ -60,6 +61,7 @@ const App = () => {
 
             <Route path="/train-booking" element={<TrainBooking />} />
             <Route path="train-review" element={<Review/>}/>
+            <Route path="/train-pnr" element={<PnrInfo />} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

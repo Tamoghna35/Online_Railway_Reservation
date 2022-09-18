@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
+import moment from "moment/moment";
 
 import * as React from "react";
 
@@ -12,6 +13,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const SearchTrainForm = (props) => {
   const history = useNavigate();
+  var t1 = moment().format("yyyy-MM-DD");
+  //console.log(t1);
   const [toMessage, setToMessage] = useState("");
   const [fromMessage, setFromMessage] = useState("");
   const [dateMessage, setDateMessage] = useState("");
@@ -20,14 +23,21 @@ const SearchTrainForm = (props) => {
 
   const [errAlert, setErrAlert] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
+  //const [open, setOpen] = React.useState(false);
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const { vertical, horizontal, open } = state;
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
-    setOpen(false);
+    setState({ ...state, open: false })
   };
 
   const handleToChange = (event) => {
@@ -59,7 +69,7 @@ const SearchTrainForm = (props) => {
       // alert("input value should NOT be empty");
       history("/", { replace: true });
       setErrAlert(true);
-      setOpen(true);
+      setState({ open: true, vertical: "top", horizontal: "right" });
       // console.log("input value is empty");
     }
   };
@@ -75,7 +85,13 @@ const SearchTrainForm = (props) => {
   return (
     <form>
       {errAlert && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical, horizontal }}
+        key={vertical + horizontal}
+      >
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
             Input value should not be empty!
           </Alert>
@@ -121,9 +137,9 @@ const SearchTrainForm = (props) => {
               type="date"
               placeholder="date"
               onChange={handleDateChange}
-              value="2022-09-07"
-              // min="2022-01-01"
-              // max="2023-12-31"
+              value=""
+              min={t1}
+              max="2022-12-31"
             />
           </div>
 
