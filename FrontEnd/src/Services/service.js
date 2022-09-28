@@ -2,15 +2,15 @@ import httpClient from "../http-common";
 
 class service {
   create(data) {
-    return httpClient.post("/auth/signup", data);
+    return httpClient.post(`/auth/signup`, data);
   }
   getToken(data) {
-    return httpClient.post("/auth/signin", data);
+    return httpClient.post(`/auth/signin`, data);
   }
 
   getTrains(from, to, token) {
     return httpClient.get(`users/getByStaions/${from}/${to}`, {
-      headers: { Authorization: `Bearer ${token}` },
+     // headers: { Authorization: `Bearer ${token}` },
     });
   }
 }

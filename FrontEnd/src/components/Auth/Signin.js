@@ -61,6 +61,7 @@ const Signin = (props) => {
       .then((data) => {
         authCtx.login(data.accessToken);
         authCtx.userIdData(data);
+        localStorage.setItem("role", data.roles.at(0));
         history("/", { replace: true });
       })
       .catch((err) => {

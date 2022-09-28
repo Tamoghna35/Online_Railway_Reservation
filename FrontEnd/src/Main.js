@@ -30,7 +30,8 @@ const Main = () => {
       <div className="container" style={containerStyles}>
         <ImageSlider slides={slides} />
         <Link to="/find-train">
-          {<button className="btn">CHARTS / VACANCY</button>}
+          {/* {<button className="btn">CHARTS / VACANCY</button>} */}
+         
         </Link>
       </div>
 

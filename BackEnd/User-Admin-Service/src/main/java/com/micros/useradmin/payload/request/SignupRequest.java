@@ -17,16 +17,18 @@ public class SignupRequest {
 	@Size(min=10, max=20)
 	private String password;
 	
-	private long phone;
+	@NotBlank
+	private String name;
+	
+	
+	
 
-	
-	
-	public long getPhone() {
-		return phone;
+	public String getName() {
+		return name;
 	}
 
-	public void setPhone(long phone) {
-		this.phone = phone;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {

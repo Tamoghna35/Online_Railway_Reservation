@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext,useState, useEffect } from "react";
 
 import {
   BrowserRouter,Routes,Route,Switch,Navigate,useNavigate,
@@ -23,16 +23,38 @@ import TrainList from "./components/SearchTrain/TrainList";
 import TrainBooking from "./components/Booking/TrainBooking";
 import { Review } from "./components/Booking/Review";
 import { PnrInfo } from "./components/SearchTrain/PnrSearchPages/PnrInfo";
+import SigninAdmin from "./components/Auth/SigninAdmin";
+import { NavbarAdmin } from "./components/Navbar/NavbarAdmin";
+import { AdminHome } from "./components/Admin/AdminHome";
+import { AddTrain }from "./components/Admin/AddTrain";
+import { UpdateTrain } from "./components/Admin/UpdateTrain";
 
 const App = () => {
   const authCtx = useContext(AuthContext);
+  const [isUser, setIsUser] = useState("USER");
+
+  let check;
+  console.log(authCtx.role);
+  useEffect(() => {
+    setIsUser("USER");
+    // check = authCtx.roles === "ADMIN" ? setIsUser("ADMIN") : setIsUser("USER");
+    if (localStorage.getItem("role")) {
+      setIsUser(localStorage.getItem("role"));
+    }
+  });
 
   return (
     <BrowserRouter history={history}>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<Home />} />
+        <Route
+            path="/"
+            element={isUser === "USER" ? <Navbar /> : <NavbarAdmin />}
+          >
+            <Route
+              index
+              element={isUser === "USER" ? <Home /> : <AdminHome />}
+            />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/find-train" element={<FindTrain />} />
@@ -47,12 +69,8 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
             )} */}
             <Route
-              path="/profile"
-              element={
-                authCtx.isLoggedIn ? (
-                  <Profile />
-                ) : (
-                  <Navigate replace to={"/signin"} />
+              path="/profile" element={ authCtx.isLoggedIn ? ( <Profile /> ) : 
+              (<Navigate replace to={"/signin"} />
                 )
               }
             />
@@ -62,6 +80,30 @@ const App = () => {
             <Route path="/train-booking" element={<TrainBooking />} />
             <Route path="train-review" element={<Review/>}/>
             <Route path="/train-pnr" element={<PnrInfo />} />
+            {!authCtx.isLoggedIn && (
+              <Route path="/admin" element={<SigninAdmin />} />
+            )}
+            <Route
+              path="/add-train"
+              element={
+                isUser === "ADMIN" ? (
+                  <AddTrain />
+                ) : (
+                  <Navigate replace to={"/signin"} />
+                )
+              }
+            />
+          
+          <Route
+              path="/update-train"
+              element={
+                isUser === "ADMIN" ? (
+                  <UpdateTrain />
+                ) : (
+                  <Navigate replace to={"/signin"} />
+                )
+              }
+            />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

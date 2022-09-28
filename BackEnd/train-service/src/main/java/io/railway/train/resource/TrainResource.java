@@ -97,7 +97,6 @@ public class TrainResource {
 		oldTr.setTotal_Seat_ac3(train0.getTotal_Seat_ac3());
 		oldTr.setTotal_Seat_sleeper(train0.getTotal_Seat_sleeper());
 		oldTr.setTrain_name(train0.getTrain_name());
-		//oldTr.setBase_fare(train0.getBase_fare());
 		tservice.saveTrain(oldTr);
 		return oldTr;
 

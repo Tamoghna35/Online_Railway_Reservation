@@ -16,9 +16,9 @@ public class Train {
 	private String from_station;
 	private String to_station;
 	private List<String> runs_on;
-	
+
 	public Train() {
-		
+
 	}
 
 	public Train(int train_id, int total_Seat_sleeper, int total_Seat_ac3, int total_Seat_ac2, int total_Seat_ac1,
@@ -33,7 +33,7 @@ public class Train {
 		this.from_station = from_station;
 		this.to_station = to_station;
 		this.runs_on = runs_on;
-		
+
 	}
 
 	public int getTrain_id() {
@@ -109,4 +109,3 @@ public class Train {
 	}
 
 }
-

@@ -62,7 +62,7 @@ export const Review = (props) => {
         seatNo: data.passengerDetail.at(i).seatNo,
         gender: data.passengerDetail.at(i).gender,
         time: new Date(),
-        id_number: "9102764714",
+        id_number: "123456789",
       };
       passList.push(obj);
     }

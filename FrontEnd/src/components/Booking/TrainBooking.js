@@ -221,15 +221,7 @@ export default function TrainBooking() {
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                         </select>
-                        {/* <input
-                          type="text"
-                          placeholder="Gender"
-                          name="gender"
-                          onChange={(event) =>
-                            handleChangeInput(inputField.id, event)
-                          }
-                          value={inputField.gender}
-                        /> */}
+                        
                       </div>
                       <div className="field">
                         <input
@@ -257,16 +249,9 @@ export default function TrainBooking() {
                 </div>
               ))}
 
-              {/* <button
-                className="ui button"
-                onClick={handleSubmit}
-                disabled={inputFields.length < 1 ? true : false}
-                style={{ marginTop: "1%" }}
-              >
-                submit
-              </button> */}
+            
 
-              {/* submit or back button start */}
+           
               <button
                 onClick={() => history(-1)}
                 className="ui labeled icon button"
@@ -291,8 +276,6 @@ export default function TrainBooking() {
                 </Link>
               </button>
 
-              {/* submit or back button end */}
-              {/* add Passenger details */}
             </div>
           </div>
           <div className="four wide column">
@@ -302,7 +285,6 @@ export default function TrainBooking() {
           </div>
         </div>
       </div>
-      {/* user detail start*/}
 
       <div className="ui segment"></div>
     </div>

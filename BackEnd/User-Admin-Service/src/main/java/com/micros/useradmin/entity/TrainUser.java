@@ -17,43 +17,33 @@ public class TrainUser {
 	private String username;
 	@Indexed(unique = true)
 	@NotBlank
-	@Size(max=30)
+	@Size(max = 30)
 	private String email;
 	@NotBlank
-	@Size(max=30)
+	@Size(max = 30)
 	private String password;
 
-	
-	public TrainUser()
-	{}
+	private String name;
+	private String role;
 
+	public TrainUser() {
+	}
 
-	
-	
+	public TrainUser(String username, String email, String password, String name) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+	}
+
 	public String getUsername() {
 		return username;
 	}
 
-
-
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-
-
-
-	public TrainUser(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 30) String email,
-			@NotBlank @Size(max = 30) String password) {
-		
-		this.username = username;
-		this.email = email;
-		this.password = password;
-
-	}
-	
-	
 
 	public String getUser_id() {
 		return user_id;
@@ -78,5 +68,21 @@ public class TrainUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 }

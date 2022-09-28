@@ -33,6 +33,8 @@ const retrieveStoredToken = () => {
 export const AuthContextProvider = (props) => {
   const initialToken = localStorage.getItem("token");
   const [token, setToken] = useState(initialToken);
+  const initialAccess = localStorage.getItem("role");
+  const [role, setRole] = useState("USER");
   const [userId, setUserId] = useState({});
 
   const userIsLoggedIn = !!token;
@@ -40,6 +42,7 @@ export const AuthContextProvider = (props) => {
   const logoutHandler = () => {
     setToken(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
 
     if (logoutTimer) {
       clearTimeout(logoutTimer);

@@ -4,7 +4,6 @@ import TrainStore from "../../../store/trainStore-context";
 
 const TrainData = (props) => {
   const history = useNavigate();
-  //   console.log(props.trainData);
   const [classData, setClassData] = useState("");
   const [trainNoData, setTrainNoData] = useState(0);
   const [classClickSL, setClassClickSL] = useState(false);
@@ -17,26 +16,7 @@ const TrainData = (props) => {
 
   const handleClick = (data, e) => {
     e.preventDefault();
-    // setClassClickSL(false);
-    // setClassClickA3(false);
-    // setClassClickA2(false);
-    // setClassClickA1(false);
-
-    // if (classData === "SL" && !classClickSL) {
-    //   setClassClickSL(true);
-    // }
-
-    // if (classData === "3A" && !classClickA3) {
-    //   setClassClickA3(true);
-    // }
-
-    // if (classData === "2A" && !classClickA2) {
-    //   setClassClickA2(true);
-    // }
-
-    // if (classData == "1A" && !classClickA1) {
-    //   setClassClickA1(true);
-    // }
+    
 
     setClassData(data);
     setClassClick(false);
@@ -44,10 +24,6 @@ const TrainData = (props) => {
   };
   console.log({ classClickSL, classClickA3, classClickA2, classClickA1 });
 
-  // const handleSubmitClick = (event) => {
-  //    event.preventDefault();
-  //   setTrainNoData(props.trainData.train_id);
-  // };
 
   useEffect(() => {
     setClassClickSL(false);
@@ -71,9 +47,6 @@ const TrainData = (props) => {
       setClassClickA1(true);
     }
 
-    // console.log(1);
-    // console.log(classData);
-    // console.log(classClickA1);
   });
 
   const trainBookingData = {
@@ -84,7 +57,6 @@ const TrainData = (props) => {
   TrainCtx.train_class(classData);
   TrainCtx.train_no(trainNoData);
 
-  //console.log({ classData, trainNoData });
 
   const addStyleSL = classClickSL
     ? "ui raised blue inverted segment"

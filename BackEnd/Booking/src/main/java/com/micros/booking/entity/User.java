@@ -12,43 +12,31 @@ public class User {
 
 	@Id
 	private String user_id;
-	
+
 	private String username;
-	
+
 	private String email;
-	
+
 	private String password;
 
-	
-	public User()
-	{}
+	public User() {
+	}
 
-
-	
-	
 	public String getUsername() {
 		return username;
 	}
-
-
-
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	public User(String username, String email, String password) {
 
-
-
-	public User(String username,String email, String password) {
-		
 		this.username = username;
 		this.email = email;
 		this.password = password;
 
 	}
-	
-	
 
 	public String getUser_id() {
 		return user_id;
@@ -73,5 +61,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

@@ -9,7 +9,6 @@ export default axios.create({
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   },
-  withCredentials: false,
-  // mode: "same-origin",
+  //withCredentials: false,
   mode: "cors",
 });

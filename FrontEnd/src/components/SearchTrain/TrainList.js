@@ -12,29 +12,26 @@ const TrainList = (props) => {
   const [isData, setIsData] = useState([]);
   const location = useLocation();
 
-  //   const to = props.items.to;
   const data = location.state;
 
   const trainRun = () => {
     service
       .getTrains(data.from, data.to)
       .then((res) => {
-        // console.log(res.data);
+  
         setIsData(res.data);
-        //   setIsLoading(false);
+       
         if (res.status === 200) {
-          // console.log(res.data.accessToken);
-          // console.log(res.status);
+          
           return res.data;
         } else {
           return res.data.then((data) => {
-            // throw new Error(errorMessage);
+            
           });
         }
       })
       .then((data) => {
-        //   authCtx.login(data.token);
-        //   history("/", { replace: true });
+       
       })
       .catch((err) => {
         alert(err.message);
@@ -45,18 +42,9 @@ const TrainList = (props) => {
     trainRun();
   }, []);
 
-  //   console.log(isData.at(0).train_id);
+ 
   return (
-    /* {data && (
-        <div>
-          <h3>Passed data:</h3>
-          <p>to: {data.to}</p>
-          <p>from: {data.from}</p>
-          <p>date: {data.dates}</p>
-          <p>className: {data.classes}</p>
-          <p>category: {data.category}</p>
-        </div>
-      )} */
+   
     <div>
       <div className="ui segment ">
         <h2 className="ui  header">
@@ -84,7 +72,7 @@ const TrainList = (props) => {
             <TrainDataCard trainData={train} key={i} />
           ))}
 
-          {/* <div>{isData.at(0).train_id}</div> */}
+         
         </div>
       </div>
     </div>

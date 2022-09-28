@@ -22,94 +22,49 @@ import com.micros.booking.repository.BookingDetailsRepository;
 import com.micros.booking.repository.BookingInfoRepository;
 import com.micros.booking.repository.BookingRepository;
 
-
-
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("Booking")
 public class BookingController {
 	@Autowired
 	private BookingRepository repository;
-	
+
 	@Autowired
 	private BookingDetailsRepository repository1;
-	
+
 	@Autowired
 	private BookingInfoRepository repository2;
-	
-//	@Autowired
-//	private Train t;
-	
-//	RestTemplate restTemplate = new RestTemplate();
-	
+
 	@PostMapping("/addBooking/")
 	public String saveBooking(@RequestBody Booking book) {
-		
-		String order_id=book.getBookingId();
-		
-		
-//		RestTemplate restTemplate = new RestTemplate();
-//		
-//		MultiValueMap<String, String> parametersMap = new LinkedMultiValueMap<String, String>();
-//		parametersMap.add("CUST_ID", book.getUser().getId());
-//		parametersMap.add("TXN_AMOUNT", book.getPrice());
-//		parametersMap.add("ORDER_ID",order_id );
-//		
-//		ModelAndView Payment =  restTemplate.postForObject("http://localhost:9009/pgredirect",parametersMap,ModelAndView.class );
-//		
-	    repository2.save(book.getBookingDetails());
-	    
-	    for(BookingDetails i:book.getPassengerList()) {
-	      repository1.save(i);
-	    }
+
+		String order_id = book.getBookingId();
+
+		repository2.save(book.getBookingDetails());
+
+		for (BookingDetails i : book.getPassengerList()) {
+			repository1.save(i);
+		}
 		repository.save(book);
 		return "Added booking details";
 	}
-	
-	
+
 	@PostMapping("/home")
 	public String Test(@RequestBody String book) {
 		return book;
 	}
-	
+
 	@GetMapping("/allBookingsWithOfUsers/{id}")
 	public List<Booking> getByUserId(@PathVariable("id") String id) {
 
-		
-		 List<Booking> book = repository.findByBooking(id);
-		 return book ;
-	}
-	
-	@GetMapping("/showTicket/{pnr}")
-	public Booking getBookedTicket(@PathVariable("pnr") String pnr) {
-		Booking book =repository.findPnr(pnr);
+		List<Booking> book = repository.findByBooking(id);
 		return book;
 	}
-	
-//	@GetMapping("/findTrain/{name}")
-//	public Train[] getBooking(@PathVariable("name") String name) {
-//		RestTemplate restTemplate = new RestTemplate();
-//		
-//		Train[] train =  restTemplate.getForObject("http://localhost:8086/trainSearch/findByTrainName/"+name, Train[].class);
-//		return  train;
-//	}
-	
-	
-//	
-//	@GetMapping("/findAllUsers")
-//	public List<Passenger> getAllUsers(@RequestBody Passenger user) {
-//		List<Passenger> allUsers =repository.findAll();
-//		return allUsers;
-//	}
-//	
-//	@GetMapping("/findAllUser/{id}")
-//	public Optional<Passenger> getAllUser(@PathVariable int id) {
-//		return repository.findById(id);
-//	}
-//	
-//	@DeleteMapping("/delete/{id}")
-//	public String deleteUser(@PathVariable int id) {
-//		 repository.deleteById(id);
-//		 return "Passenger deleted with id :"+id;
-//	}
+
+	@GetMapping("/showTicket/{pnr}")
+	public Booking getBookedTicket(@PathVariable("pnr") String pnr) {
+		Booking book = repository.findPnr(pnr);
+		return book;
+	}
+
 }

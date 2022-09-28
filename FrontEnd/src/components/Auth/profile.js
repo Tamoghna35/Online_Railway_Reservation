@@ -37,7 +37,7 @@ const Profile = (props) => {
             <div class="two wide column">
               <div class="ui small circular rotate left reveal image">
                 <img src={img} class="visible content" />
-                <img src={img} class="hidden content" />
+                {/* <img src={img} class="hidden content" /> */}
               </div>
             </div>
             <div class="fourteen wide column">

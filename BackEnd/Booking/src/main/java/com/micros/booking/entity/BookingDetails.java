@@ -17,10 +17,12 @@ public class BookingDetails {
 	private String gender;
 	private Date time;
 	private String id_number;
+
 	public BookingDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public BookingDetails(String pnr, String name, int age, int seatNo, String gender, Timestamp time,
 			String id_number) {
 		super();
@@ -32,55 +34,69 @@ public class BookingDetails {
 		this.time = time;
 		this.id_number = id_number;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getPnr() {
 		return pnr;
 	}
+
 	public void setPnr(String pnr) {
 		this.pnr = pnr;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public int getAge() {
 		return age;
 	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
+
 	public int getSeatNo() {
 		return seatNo;
 	}
+
 	public void setSeatNo(int seatNo) {
 		this.seatNo = seatNo;
 	}
+
 	public String getGender() {
 		return gender;
 	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
 	public Date getTime() {
 		return time;
 	}
+
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
+
 	public String getId_number() {
 		return id_number;
 	}
+
 	public void setId_number(String id_number) {
 		this.id_number = id_number;
 	}
-	
-	
-	
+
 }

@@ -32,6 +32,7 @@ const Signup = () => {
   const usernameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const nameInputRef = useRef();
 
   const authCtx = useContext(AuthContext);
 
@@ -49,6 +50,7 @@ const Signup = () => {
     const username = usernameInputRef.current.value;
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
+    const name = nameInputRef.current.value;
 
     // console.log(enteredUsername);
     // console.log(enteredPassword);
@@ -56,7 +58,8 @@ const Signup = () => {
     // optional: Add validation
 
     setIsLoading(true);
-    const User = { username, email, password };
+    //const User = { username, email, password };
+    const User = { username, email, password, name };
 
     service
       .create(User)
@@ -101,6 +104,13 @@ const Signup = () => {
             placeholder="username"
             required
             ref={usernameInputRef}
+          />
+          <input
+            type="text"
+            placeholder="name"
+            required
+            ref={nameInputRef}
+            autoComplete="off"
           />
           <input
             type="email"

@@ -26,7 +26,8 @@ import com.micros.useradmin.service.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+//@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 	
 	@Autowired
@@ -68,10 +69,13 @@ public class AuthController {
 		// Create new user's account
 		TrainUser user = new TrainUser(signUpRequest.getUsername(), 
 							 signUpRequest.getEmail(),
-							 encoder.encode(signUpRequest.getPassword()));
-//		
+							 encoder.encode(signUpRequest.getPassword()),signUpRequest.getName());
+		
+		user.setRole("USER");
 		userRepository.save(user);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	
+	
 
 }
