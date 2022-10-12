@@ -1,0 +1,11 @@
+paypal:
+  client:
+    id: AdZc5cI-xGTXm7biFRWIpcFtnvxqCO1ATxVGF8li_JX9UDr7fKjKzPTWclgvLxks2bXDedxQ6H-SAom_
+    secret: EIgOdsskpVFfo9TBPZws02Ljisp-K432VcaepUJ6wyTAPL1VKuR9DKWiBrpIkWYGIIcadM3t5GeTepE-
+  mode: sandbox
+server:
+  port: 9090
+spring:
+  application:
+    name: payment-gateway-service
+  

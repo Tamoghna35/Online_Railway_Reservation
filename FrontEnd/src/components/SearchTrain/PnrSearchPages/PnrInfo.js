@@ -30,7 +30,7 @@ export const PnrInfo = (props) => {
         }
       })
       .then((data) => {
-        // history("/", { replace: true });
+        
       })
       .catch((err) => {
         alert(err.message);

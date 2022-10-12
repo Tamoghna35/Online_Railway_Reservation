@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
+
 import io.railway.train.entity.Request;
 import io.railway.train.entity.TimeTable;
 import io.railway.train.entity.Train;
@@ -35,7 +37,6 @@ import io.railway.train.service.TrainService;
 @RequestMapping("/trainSearch")
 public class TrainResource {
 
-	private static int idd = 1;
 
 	@Autowired
 	private RestTemplate template;
@@ -112,78 +113,78 @@ public class TrainResource {
 
 	// -----------------------------------------TimeTable related Operations--------------------------------------------------
 
-	@GetMapping("/getTrains/DateFromTo/{date}/{from}/{to}")
-	public List<TimeTable> getTrainFrom(@PathVariable("date") String date, @PathVariable("from") String from,
-			@PathVariable("to") String to) throws ParseException {
-		List<TimeTable> timetables = ttservice.getAvailableTrains(date);
-		for (int i = 0; i < timetables.size(); i++) {
-			List<Train> trainList = new ArrayList<Train>();
-			for (Train tr : timetables.get(i).getTrains()) {
-
-				if (tr.getFrom_station().equalsIgnoreCase(from) && tr.getTo_station().equalsIgnoreCase(to)) {
-					trainList.add(tr);
-				}
-			}
-			timetables.get(i).setTrains(trainList);
-		}
-		return timetables;
-	}
-
-	@PostMapping("/addTrainsToTable")
-	public String modifyTable(@RequestBody Request request) throws ParseException {
-		String datestring = request.getDatestring();
-		System.out.println(datestring);
-		Date today = new Date();
-		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String today_string = dateFormat.format(today);
-		String delMsg = ttservice.removeTrains(today_string);
-		System.out.println(delMsg);
-		Calendar c = Calendar.getInstance();
-		c.setTime(today);
-		c.add(Calendar.DATE, 11);
-		Date addedDate = c.getTime();
-		System.out.println("Day is: " + addedDate.getDay());
-		String NewDate = dateFormat.format(addedDate);
-		System.out.println(NewDate);
-		List<TimeTable> ttlist = ttservice.getAvailableTrains(NewDate);
-		if (ttlist.isEmpty()) {
-			// Add the new Record
-			String days[] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-			String day_of_week = days[addedDate.getDay() - 1];
-			List<Train> list1 = tservice.findAll();// Here I change
-			List<Train> list2 = new ArrayList<Train>();
-			for (Train trn : list1) {
-				if (trn.getRuns_on().contains(day_of_week)) {
-					list2.add(trn);
-				}
-			}
-			TimeTable timeTable = new TimeTable();
-			timeTable.setId(idd);
-			timeTable.setDate(NewDate);
-			timeTable.setTrains(list2);
-			ttservice.addRecord(timeTable);
-			idd++;
-			return "Time Table updated";
-		}
-		return "No changes required";
-	}
-
-	@PutMapping("/changeSeat/Train/{today}")
-	public String updateSeats(@PathVariable("today") String today, @RequestBody Train train2) throws ParseException {
-		TimeTable tt1 = ttservice.fetchDetails(today);
-		List<Train> tlist = tt1.getTrains();
-		for (Train train : tlist) {
-			if (train.getTrain_id() == train2.getTrain_id()) {
-				train.setTotal_Seat_ac1(train2.getTotal_Seat_ac1());
-				train.setTotal_Seat_ac2(train2.getTotal_Seat_ac2());
-				train.setTotal_Seat_ac3(train2.getTotal_Seat_ac3());
-				train.setTotal_Seat_sleeper(train2.getTotal_Seat_sleeper());
-				break;
-			}
-		}
-		tt1.setTrains(tlist);
-		ttservice.addRecord(tt1);
-		return train2.getTrain_name() + "'s seat count for " + today + " is updated";
-	}
+//	@GetMapping("/getTrains/DateFromTo/{date}/{from}/{to}")
+//	public List<TimeTable> getTrainFrom(@PathVariable("date") String date, @PathVariable("from") String from,
+//			@PathVariable("to") String to) throws ParseException {
+//		List<TimeTable> timetables = ttservice.getAvailableTrains(date);
+//		for (int i = 0; i < timetables.size(); i++) {
+//			List<Train> trainList = new ArrayList<Train>();
+//			for (Train tr : timetables.get(i).getTrains()) {
+//
+//				if (tr.getFrom_station().equalsIgnoreCase(from) && tr.getTo_station().equalsIgnoreCase(to)) {
+//					trainList.add(tr);
+//				}
+//			}
+//			timetables.get(i).setTrains(trainList);
+//		}
+//		return timetables;
+//	}
+//
+//	@PostMapping("/addTrainsToTable")
+//	public String modifyTable(@RequestBody Request request) throws ParseException {
+//		String datestring = request.getDatestring();
+//		System.out.println(datestring);
+//		Date today = new Date();
+//		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		String today_string = dateFormat.format(today);
+//		String delMsg = ttservice.removeTrains(today_string);
+//		System.out.println(delMsg);
+//		Calendar c = Calendar.getInstance();
+//		c.setTime(today);
+//		c.add(Calendar.DATE, 11);
+//		Date addedDate = c.getTime();
+//		System.out.println("Day is: " + addedDate.getDay());
+//		String NewDate = dateFormat.format(addedDate);
+//		System.out.println(NewDate);
+//		List<TimeTable> ttlist = ttservice.getAvailableTrains(NewDate);
+//		if (ttlist.isEmpty()) {
+//			// Add the new Record
+//			String days[] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+//			String day_of_week = days[addedDate.getDay() - 1];
+//			List<Train> list1 = tservice.findAll();// Here I change
+//			List<Train> list2 = new ArrayList<Train>();
+//			for (Train trn : list1) {
+//				if (trn.getRuns_on().contains(day_of_week)) {
+//					list2.add(trn);
+//				}
+//			}
+//			TimeTable timeTable = new TimeTable();
+//			timeTable.setId(idd);
+//			timeTable.setDate(NewDate);
+//			timeTable.setTrains(list2);
+//			ttservice.addRecord(timeTable);
+//			idd++;
+//			return "Time Table updated";
+//		}
+//		return "No changes required";
+//	}
+//
+//	@PutMapping("/changeSeat/Train/{today}")
+//	public String updateSeats(@PathVariable("today") String today, @RequestBody Train train2) throws ParseException {
+//		TimeTable tt1 = ttservice.fetchDetails(today);
+//		List<Train> tlist = tt1.getTrains();
+//		for (Train train : tlist) {
+//			if (train.getTrain_id() == train2.getTrain_id()) {
+//				train.setTotal_Seat_ac1(train2.getTotal_Seat_ac1());
+//				train.setTotal_Seat_ac2(train2.getTotal_Seat_ac2());
+//				train.setTotal_Seat_ac3(train2.getTotal_Seat_ac3());
+//				train.setTotal_Seat_sleeper(train2.getTotal_Seat_sleeper());
+//				break;
+//			}
+//		}
+//		tt1.setTrains(tlist);
+//		ttservice.addRecord(tt1);
+//		return train2.getTrain_name() + "'s seat count for " + today + " is updated";
+//	}
 
 }

@@ -52,10 +52,7 @@ const Signup = () => {
     const password = passwordInputRef.current.value;
     const name = nameInputRef.current.value;
 
-    // console.log(enteredUsername);
-    // console.log(enteredPassword);
-
-    // optional: Add validation
+  
 
     setIsLoading(true);
     //const User = { username, email, password };
@@ -67,16 +64,13 @@ const Signup = () => {
         // console.log(res.data);
         setIsLoading(false);
         if (res.status === 200) {
-          // console.log(res.data.accessToken);
-          // console.log(res.status);
+          
           return res.data;
         } else {
           return res.data.then((data) => {
             console.log(data);
             let errorMessage = "Authentication failed!";
-            // if (data && data.error && data.error.message) {
-            //   errorMessage = data.error.message;
-            // }
+            
 
             throw new Error(errorMessage);
           });

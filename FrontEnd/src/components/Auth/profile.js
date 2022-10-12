@@ -44,7 +44,7 @@ const Profile = (props) => {
               <div class="ui  segment">
                 <h3>User Profile </h3>
                 <div class="ui clearing divider"></div>
-                <h3>Name: {authCtx.userId.username} </h3>
+                <h3>UserName: {authCtx.userId.username} </h3>
                 <div class="ui clearing divider"></div>
                 <h3>Email: {authCtx.userId.email} </h3>
               </div>

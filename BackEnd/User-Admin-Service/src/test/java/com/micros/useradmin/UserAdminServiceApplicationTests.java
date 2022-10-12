@@ -56,7 +56,7 @@ class UserAdminServiceApplicationTests {
 	public void testUpdate() {
 		user.setEmail("samruddhi2000@gmail.com");
 		Mockito.when(userRepository.save(user)).thenReturn(user);
-		assertEquals("samruddhi@gmail.com",uservice.createUser(user).getEmail());
+		assertEquals("samruddhi2000@gmail.com",uservice.createUser(user).getEmail());
 	}
 	
 	@Test

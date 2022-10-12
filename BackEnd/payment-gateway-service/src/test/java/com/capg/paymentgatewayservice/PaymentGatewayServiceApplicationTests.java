@@ -1,10 +1,10 @@
-package io.railway;
+package com.capg.paymentgatewayservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringPaymentPaytmApplicationTests {
+class PaymentGatewayServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

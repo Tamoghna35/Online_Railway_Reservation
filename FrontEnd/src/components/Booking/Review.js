@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import "./Success.css";
 import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 import { display } from "@mui/system";
+import FetchPaymentLink from "../FetchPaymentLink";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -95,30 +96,37 @@ export const Review = (props) => {
       pnr: pnr,
       status: "conform",
     };
+ console.log(data.price * data.passengerDetail.length);
+ FetchPaymentLink.FetchPaymentLink(data.price * data.passengerDetail.length)
+ .then((value)=>{
+  //*************** */
+  service
+  .createBooking1(bookingData)
+  .then((res) => {
+    console.log(res.data);
+    console.log("success");
+    if (res.status === 200) {
+      setState({ open: true, vertical: "top", horizontal: "right" });
 
-    service
-      .createBooking1(bookingData)
-      .then((res) => {
-        console.log(res.data);
-        console.log("success");
-        if (res.status === 200) {
-          setState({ open: true, vertical: "top", horizontal: "right" });
-
-          return res.data;
-        } else {
-          return res.data.then((data) => {
-            console.log(data);
-          });
-        }
-      })
-      .then((data) => {
-        // history("/", { replace: true });
-        setSuccsessMessage(false);
-        setState({ open: true, vertical: "top", horizontal: "right" });
-      })
-      .catch((err) => {
-        alert(err.message);
+      return res.data;
+    } else {
+      return res.data.then((data) => {
+        console.log(data);
       });
+    }
+  })
+  .then((data) => {
+    // history("/", { replace: true });
+    setSuccsessMessage(false);
+    setState({ open: true, vertical: "top", horizontal: "right" });
+  })
+  .catch((err) => {
+    alert(err.message);
+  });
+//*************** */
+  window.open(value)
+ })
+    
   };
 
   const ShowNext = successMessage ? "none" : "block";

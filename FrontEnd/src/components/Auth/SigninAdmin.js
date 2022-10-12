@@ -14,60 +14,18 @@ const Signin = (props) => {
 
   const authCtx = useContext(AuthContext);
 
-  // const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState("");
 
-  // const switchAuthModeHandler = () => {
-  //   setIsLogin((prevState) => !prevState);
-  // };
+  
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     const username = usernameInputRef.current.value;
     const password = passwordInputRef.current.value;
-
-    // console.log(enteredUsername);
-    // console.log(enteredPassword);
-
-    // optional: Add validation
-
     setIsLoading(true);
-    // const Admin = { username, password };
-
-    //  login = () => {
-    //   service
-    //     .getToken(Admin)
-    //     .then((res) => {
-    //       //  console.log(res.data.accessToken);
-    //       console.log(res.data);
-    //       setIsLoading(false);
-    //       if (res.status === 200) {
-    //         // console.log(res.data.accessToken);
-    //         // console.log(res.status);
-    //         return res.data;
-    //       } else {
-    //         return res.data.then((data) => {
-    //           console.log(data);
-    //           let errorMessage = "Authentication failed!";
-    //           // if (data && data.error && data.error.message) {
-    //           //   errorMessage = data.error.message;
-    //           // }
-
-    //           throw new Error(errorMessage);
-    //         });
-    //       }
-    //     })
-    //     .then((data) => {
-    //       authCtx.login(data.accessToken);
-    //       authCtx.userIdData(data);
-    //       history("/", { replace: true });
-    //     })
-    //     .catch((err) => {
-    //       alert(err.message);
-    //     });
-    // };
+    
   };
 
   useEffect(() => {
@@ -84,8 +42,7 @@ const Signin = (props) => {
             name="username"
             required
             ref={usernameInputRef}
-            // value={username}
-            // onChange={onChangeUsername}
+            
           />
           <input
             type="password"
@@ -93,8 +50,7 @@ const Signin = (props) => {
             name="password"
             required
             ref={passwordInputRef}
-            // value={password}
-            // onChange={onChangePassword}
+           
           />
           {!isLoading && <button>Sign In</button>}
           {isLoading && <p>Sending request...</p>}
